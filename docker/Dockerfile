@@ -6,7 +6,9 @@ WORKDIR /go/src/github.com/k-akari/payment.com
 
 COPY . .
 
-RUN go build -o dist/api cmd/api/*
+RUN apt-get update && apt-get install --no-install-recommends -y make
+
+RUN make build
 
 FROM gcr.io/distroless/static-debian12:latest as api
 
