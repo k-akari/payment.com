@@ -7,3 +7,9 @@ build:
 
 lint:
 	golangci-lint run ./...
+
+test:
+	go test -race ./...
+
+testv:
+	go test -race -v ./...
