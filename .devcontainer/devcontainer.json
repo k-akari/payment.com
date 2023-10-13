@@ -1,0 +1,19 @@
+{
+  "name": "Go",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.yml"
+  ],
+  "postStartCommand": "go mod download",
+  "service": "api",
+  "workspaceFolder": "/go/src/github.com/k-akari/payment.com",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "github.copilot",
+        "golang.go"
+      ]
+    }
+  }
+}

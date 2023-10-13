@@ -1,0 +1,21 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/go/src/github.com/k-akari/payment.com
+      - ~/.ssh:/root/.ssh
+      - ~/.gitconfig:/root/.gitconfig
+      - go_mod:/go/pkg/mod
+    ports:
+      - 8081:8080
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    networks:
+      - db
+
+volumes:
+  go_mod:
