@@ -24,6 +24,7 @@ services:
       MYSQL_USER: user
     volumes:
       - db_data:/var/lib/mysql
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - db
 
