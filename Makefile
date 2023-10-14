@@ -1,6 +1,7 @@
 .PHONY: \
 	build \
-	lint
+	lint \
+	migrate
 
 build:
 	go build -o dist/api cmd/api/*
@@ -13,3 +14,6 @@ test:
 
 testv:
 	go test -race -v ./...
+
+migrate:
+	mysqldef --user=root --password=password --port=3306 --host=db payment < ./db/sql/schema.sql

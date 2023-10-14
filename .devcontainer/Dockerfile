@@ -15,6 +15,18 @@ RUN apt update && \
   apt clean && \
   rm -rf /var/lib/apt/lists/*
 
+# Install sqldef
+RUN ARCH=$(uname -m) && \
+  case "$ARCH" in \
+    x86_64) FILE="mysqldef_linux_amd64.tar.gz" ;; \
+    aarch64) FILE="mysqldef_linux_arm64.tar.gz" ;; \
+    *) echo "Unsupported architecture" && exit 1 ;; \
+  esac && \
+  curl -OL "https://github.com/k0kubun/sqldef/releases/download/v0.16.9/$FILE" && \
+  tar -zxvf "$FILE" && \
+  mv mysqldef /usr/local/bin && \
+  rm "$FILE"
+
 # Set working directory
 WORKDIR /go/src/github.com/k-akari/payment.com
 
