@@ -8,20 +8,13 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type (
-	Client interface {
-		Exec(context.Context, string, any) (sql.Result, error)
-		Query(context.Context, string, any) (*sqlx.Rows, error)
-	}
-
-	client struct {
-		db *sqlx.DB
-	}
-)
+type client struct {
+	db *sqlx.DB
+}
 
 func NewClient(
 	db *sqlx.DB,
-) Client {
+) *client {
 	return &client{
 		db: db,
 	}

@@ -5,15 +5,14 @@ import (
 	"fmt"
 
 	"github.com/k-akari/payment.com/internal/domain"
-	"github.com/k-akari/payment.com/internal/infrastructure/database"
 )
 
 type companyRepository struct {
-	dba database.Client
+	dba accessor
 }
 
 func NewCompanyRepository(
-	dba database.Client,
+	dba accessor,
 ) *companyRepository {
 	return &companyRepository{
 		dba: dba,
