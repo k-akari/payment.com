@@ -34,7 +34,8 @@ WORKDIR /go/src/github.com/k-akari/payment.com
 COPY . .
 
 # Install tools
-RUN go install golang.org/x/tools/cmd/goimports@latest && \
+RUN go install go.uber.org/mock/mockgen@latest && \
+  go install golang.org/x/tools/cmd/goimports@latest && \
   go install golang.org/x/tools/gopls@latest && \
   go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest && \
   go install github.com/go-delve/delve/cmd/dlv@latest

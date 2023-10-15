@@ -17,3 +17,12 @@ testv:
 
 migrate:
 	mysqldef --user=root --password=password --port=3306 --host=db payment < ./db/sql/schema.sql
+
+gen:
+	go generate ./...
+	$(call fmt)
+
+define fmt
+	go fmt ./...
+	goimports -w cmd internal
+endef
