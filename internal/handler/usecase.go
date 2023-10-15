@@ -12,4 +12,7 @@ type (
 		CreateCompany(ctx context.Context, company *domain.Company) (domain.CompanyID, error)
 		GetCompanyByID(ctx context.Context, companyID domain.CompanyID) (*domain.Company, error)
 	}
+	clientUsecase interface {
+		Create(ctx context.Context, client *domain.Client) (domain.ClientID, error)
+	}
 )

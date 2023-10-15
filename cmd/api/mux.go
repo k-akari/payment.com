@@ -29,15 +29,21 @@ func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
 
 	dbc := database.NewClient(db)
 
-	cr := repository.NewCompanyRepository(dbc)
-	cu := usecase.NewCompanyUsecase(cr)
-	ch := handler.NewCompanyHandler(cu)
+	cor := repository.NewCompanyRepository(dbc)
+	clr := repository.NewClientRepository(dbc)
+	cou := usecase.NewCompanyUsecase(cor)
+	clu := usecase.NewClientUsecase(clr)
+	coh := handler.NewCompanyHandler(cou)
+	clh := handler.NewClientHandler(clu)
 
 	mux.Route("/companies", func(mux chi.Router) {
-		mux.Post("/", ch.Create)
+		mux.Post("/", coh.Create)
 		mux.Route("/{companyID}", func(mux chi.Router) {
 			mux.Use(companyCtx)
-			mux.Get("/", ch.GetByID)
+			mux.Get("/", coh.GetByID)
+			mux.Route("/clients", func(mux chi.Router) {
+				mux.Post("/", clh.Create)
+			})
 		})
 	})
 

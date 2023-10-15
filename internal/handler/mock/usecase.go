@@ -68,3 +68,41 @@ func (mr *MockcompanyUsecaseMockRecorder) GetCompanyByID(ctx, companyID any) *go
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCompanyByID", reflect.TypeOf((*MockcompanyUsecase)(nil).GetCompanyByID), ctx, companyID)
 }
+
+// MockclientUsecase is a mock of clientUsecase interface.
+type MockclientUsecase struct {
+	ctrl     *gomock.Controller
+	recorder *MockclientUsecaseMockRecorder
+}
+
+// MockclientUsecaseMockRecorder is the mock recorder for MockclientUsecase.
+type MockclientUsecaseMockRecorder struct {
+	mock *MockclientUsecase
+}
+
+// NewMockclientUsecase creates a new mock instance.
+func NewMockclientUsecase(ctrl *gomock.Controller) *MockclientUsecase {
+	mock := &MockclientUsecase{ctrl: ctrl}
+	mock.recorder = &MockclientUsecaseMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockclientUsecase) EXPECT() *MockclientUsecaseMockRecorder {
+	return m.recorder
+}
+
+// Create mocks base method.
+func (m *MockclientUsecase) Create(ctx context.Context, client *domain.Client) (domain.ClientID, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", ctx, client)
+	ret0, _ := ret[0].(domain.ClientID)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockclientUsecaseMockRecorder) Create(ctx, client any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockclientUsecase)(nil).Create), ctx, client)
+}
