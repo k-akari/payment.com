@@ -53,3 +53,18 @@ func (mr *MockcompanyUsecaseMockRecorder) CreateCompany(ctx, company any) *gomoc
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCompany", reflect.TypeOf((*MockcompanyUsecase)(nil).CreateCompany), ctx, company)
 }
+
+// GetCompanyByID mocks base method.
+func (m *MockcompanyUsecase) GetCompanyByID(ctx context.Context, companyID domain.CompanyID) (*domain.Company, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCompanyByID", ctx, companyID)
+	ret0, _ := ret[0].(*domain.Company)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCompanyByID indicates an expected call of GetCompanyByID.
+func (mr *MockcompanyUsecaseMockRecorder) GetCompanyByID(ctx, companyID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCompanyByID", reflect.TypeOf((*MockcompanyUsecase)(nil).GetCompanyByID), ctx, companyID)
+}

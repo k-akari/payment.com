@@ -30,6 +30,7 @@ func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
 	ch := handler.NewCompanyHandler(cu)
 
 	mux.Post("/companies", ch.Create)
+	mux.Get("/companies/{companyID}", ch.GetByID)
 
 	return mux, cleanup, nil
 }

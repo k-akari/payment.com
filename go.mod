@@ -13,6 +13,7 @@ require go.uber.org/mock v0.3.0 // indirect
 
 require (
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
+	github.com/go-chi/chi v1.5.5
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator v9.31.0+incompatible

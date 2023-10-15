@@ -30,3 +30,15 @@ func (u *adminUsecase) CreateCompany(
 
 	return cid, nil
 }
+
+func (u *adminUsecase) GetCompanyByID(
+	ctx context.Context,
+	companyID domain.CompanyID,
+) (*domain.Company, error) {
+	company, err := u.companyRepository.GetByID(ctx, companyID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to run u.companyRepository.GetByID: %w", err)
+	}
+
+	return company, nil
+}
