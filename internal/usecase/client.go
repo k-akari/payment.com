@@ -30,3 +30,15 @@ func (u *clientUsecase) Create(
 
 	return cid, nil
 }
+
+func (u *clientUsecase) GetByID(
+	ctx context.Context,
+	clientID domain.ClientID,
+) (*domain.Client, error) {
+	client, err := u.clientRepository.GetByID(ctx, clientID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to run u.clientRepository.GetByID: %w", err)
+	}
+
+	return client, nil
+}

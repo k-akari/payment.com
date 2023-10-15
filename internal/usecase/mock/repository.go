@@ -106,3 +106,18 @@ func (mr *MockclientRepositoryMockRecorder) Create(ctx, client any) *gomock.Call
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockclientRepository)(nil).Create), ctx, client)
 }
+
+// GetByID mocks base method.
+func (m *MockclientRepository) GetByID(ctx context.Context, clientID domain.ClientID) (*domain.Client, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByID", ctx, clientID)
+	ret0, _ := ret[0].(*domain.Client)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByID indicates an expected call of GetByID.
+func (mr *MockclientRepositoryMockRecorder) GetByID(ctx, clientID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockclientRepository)(nil).GetByID), ctx, clientID)
+}

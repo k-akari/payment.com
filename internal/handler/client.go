@@ -75,3 +75,43 @@ func (ch *clientHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 	respondJSON(ctx, w, resp, http.StatusOK)
 }
+
+func (ch *clientHandler) GetByID(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	sclid, ok := ctx.Value("clientID").(string)
+	if !ok {
+		respondJSON(ctx, w, &errResponse{Message: "invalid company id"}, http.StatusInternalServerError)
+		return
+	}
+
+	clid, err := strconv.Atoi(sclid)
+	if err != nil {
+		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
+		return
+	}
+
+	c, err := ch.clientUsecase.GetByID(ctx, domain.ClientID(clid))
+	if err != nil {
+		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
+		return
+	}
+
+	resp := struct {
+		CompanyID       domain.CompanyID `json:"company_id"`
+		Name            string           `json:"name"`
+		Representative  string           `json:"representative"`
+		TelephoneNumber string           `json:"telephone_number"`
+		PostalCode      string           `json:"postal_code"`
+		Address         string           `json:"address"`
+	}{
+		CompanyID:       c.CompanyID,
+		Name:            c.Name,
+		Representative:  c.Representative,
+		TelephoneNumber: c.TelephoneNumber,
+		PostalCode:      c.PostalCode,
+		Address:         c.Address,
+	}
+
+	respondJSON(ctx, w, resp, http.StatusOK)
+}
