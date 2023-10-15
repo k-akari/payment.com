@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-chi/chi"
 	"github.com/k-akari/payment.com/internal/domain"
 	"github.com/k-akari/payment.com/internal/pkg/validator"
 )
@@ -67,10 +66,15 @@ func (ch *companyHandler) Create(w http.ResponseWriter, r *http.Request) {
 func (ch *companyHandler) GetByID(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	scid := chi.URLParam(r, "companyID")
+	scid, ok := ctx.Value("companyID").(string)
+	if !ok {
+		respondJSON(ctx, w, &errResponse{Message: "invalid company id"}, http.StatusInternalServerError)
+		return
+	}
+
 	cid, err := strconv.Atoi(scid)
 	if err != nil {
-		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusBadRequest)
+		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return
 	}
 

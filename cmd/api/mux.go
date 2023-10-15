@@ -33,8 +33,22 @@ func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
 	cu := usecase.NewCompanyUsecase(cr)
 	ch := handler.NewCompanyHandler(cu)
 
-	mux.Post("/companies", ch.Create)
-	mux.Get("/companies/{companyID}", ch.GetByID)
+	mux.Route("/companies", func(mux chi.Router) {
+		mux.Post("/", ch.Create)
+		mux.Route("/{companyID}", func(mux chi.Router) {
+			mux.Use(companyCtx)
+			mux.Get("/", ch.GetByID)
+		})
+	})
 
 	return mux, cleanup, nil
+}
+
+func companyCtx(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		companyID := chi.URLParam(r, "companyID")
+
+		ctx := context.WithValue(r.Context(), "companyID", companyID)
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
 }
