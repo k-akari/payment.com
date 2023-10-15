@@ -11,7 +11,7 @@ type adminUsecase struct {
 	companyRepository companyRepository
 }
 
-func NewAdminUsecase(
+func NewCompanyUsecase(
 	companyRepository companyRepository,
 ) *adminUsecase {
 	return &adminUsecase{

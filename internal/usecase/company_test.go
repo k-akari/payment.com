@@ -10,13 +10,13 @@ import (
 	gomock "go.uber.org/mock/gomock"
 )
 
-type adminUsecaseTestHelper struct {
+type companyUsecaseTestHelper struct {
 	sub               *adminUsecase
 	ctx               context.Context
 	companyRepository *mock.MockcompanyRepository
 }
 
-func createAdminUsecaseTestHelper(t *testing.T) *adminUsecaseTestHelper {
+func createCompanyUsecaseTestHelper(t *testing.T) *companyUsecaseTestHelper {
 	t.Helper()
 
 	ctrl := gomock.NewController(t)
@@ -27,8 +27,8 @@ func createAdminUsecaseTestHelper(t *testing.T) *adminUsecaseTestHelper {
 		ctrl.Finish()
 	})
 
-	return &adminUsecaseTestHelper{
-		sub:               NewAdminUsecase(companyRepository),
+	return &companyUsecaseTestHelper{
+		sub:               NewCompanyUsecase(companyRepository),
 		ctx:               context.Background(),
 		companyRepository: companyRepository,
 	}
@@ -48,7 +48,7 @@ func TestAdminUsecase_CreateCompany(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		t.Parallel()
 
-		h := createAdminUsecaseTestHelper(t)
+		h := createCompanyUsecaseTestHelper(t)
 
 		h.companyRepository.EXPECT().Create(h.ctx, &company).Return(nil)
 
@@ -61,7 +61,7 @@ func TestAdminUsecase_CreateCompany(t *testing.T) {
 	t.Run("failure", func(t *testing.T) {
 		t.Parallel()
 
-		h := createAdminUsecaseTestHelper(t)
+		h := createCompanyUsecaseTestHelper(t)
 
 		h.companyRepository.EXPECT().Create(h.ctx, &company).Return(errors.New("error"))
 
