@@ -68,3 +68,41 @@ func (mr *MockcompanyRepositoryMockRecorder) GetByID(ctx, companyID any) *gomock
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockcompanyRepository)(nil).GetByID), ctx, companyID)
 }
+
+// MockclientRepository is a mock of clientRepository interface.
+type MockclientRepository struct {
+	ctrl     *gomock.Controller
+	recorder *MockclientRepositoryMockRecorder
+}
+
+// MockclientRepositoryMockRecorder is the mock recorder for MockclientRepository.
+type MockclientRepositoryMockRecorder struct {
+	mock *MockclientRepository
+}
+
+// NewMockclientRepository creates a new mock instance.
+func NewMockclientRepository(ctrl *gomock.Controller) *MockclientRepository {
+	mock := &MockclientRepository{ctrl: ctrl}
+	mock.recorder = &MockclientRepositoryMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockclientRepository) EXPECT() *MockclientRepositoryMockRecorder {
+	return m.recorder
+}
+
+// Create mocks base method.
+func (m *MockclientRepository) Create(ctx context.Context, client *domain.Client) (domain.ClientID, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", ctx, client)
+	ret0, _ := ret[0].(domain.ClientID)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockclientRepositoryMockRecorder) Create(ctx, client any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockclientRepository)(nil).Create), ctx, client)
+}

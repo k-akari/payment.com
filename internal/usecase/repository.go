@@ -12,4 +12,7 @@ type (
 		Create(ctx context.Context, company *domain.Company) (domain.CompanyID, error)
 		GetByID(ctx context.Context, companyID domain.CompanyID) (*domain.Company, error)
 	}
+	clientRepository interface {
+		Create(ctx context.Context, client *domain.Client) (domain.ClientID, error)
+	}
 )
