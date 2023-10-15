@@ -22,11 +22,6 @@ func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
 	mux.Use(middleware.Recoverer)
 	mux.Use(middleware.Timeout(60 * time.Second))
 
-	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json; charset=utf-8")
-		_, _ = w.Write([]byte(`{"status": "ok"}`))
-	})
-
 	db, cleanup, err := database.New(cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBName, cfg.DBPort)
 	if err != nil {
 		return nil, cleanup, err
