@@ -9,6 +9,6 @@ import (
 
 type (
 	companyUsecase interface {
-		CreateCompany(ctx context.Context, company *domain.Company) error
+		CreateCompany(ctx context.Context, company *domain.Company) (domain.CompanyID, error)
 	}
 )

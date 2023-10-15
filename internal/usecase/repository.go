@@ -9,7 +9,7 @@ import (
 
 type (
 	companyRepository interface {
-		Create(ctx context.Context, company *domain.Company) error
+		Create(ctx context.Context, company *domain.Company) (domain.CompanyID, error)
 		GetByID(ctx context.Context, companyID domain.CompanyID) (*domain.Company, error)
 	}
 )

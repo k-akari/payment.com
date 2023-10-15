@@ -22,11 +22,11 @@ func NewCompanyUsecase(
 func (u *adminUsecase) CreateCompany(
 	ctx context.Context,
 	company *domain.Company,
-) error {
-	err := u.companyRepository.Create(ctx, company)
+) (domain.CompanyID, error) {
+	cid, err := u.companyRepository.Create(ctx, company)
 	if err != nil {
-		return fmt.Errorf("failed to run u.companyRepository.Create: %w", err)
+		return domain.CompanyID(0), fmt.Errorf("failed to run u.companyRepository.Create: %w", err)
 	}
 
-	return nil
+	return cid, nil
 }

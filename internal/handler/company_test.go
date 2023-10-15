@@ -2,10 +2,12 @@ package handler
 
 import (
 	"bytes"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/k-akari/payment.com/internal/domain"
 	"github.com/k-akari/payment.com/internal/handler/mock"
 	"github.com/k-akari/payment.com/internal/testutil"
 	gomock "go.uber.org/mock/gomock"
@@ -36,7 +38,7 @@ func TestCompanyHandler_CreateCompany(t *testing.T) {
 
 		h := createCompanyHandlerTestHelper(t)
 
-		h.companyUsecase.EXPECT().CreateCompany(gomock.Any(), gomock.Any()).Return(nil)
+		h.companyUsecase.EXPECT().CreateCompany(gomock.Any(), gomock.Any()).Return(domain.CompanyID(10), nil)
 
 		w := httptest.NewRecorder()
 		r := httptest.NewRequest(http.MethodPost, "/companies", bytes.NewReader(testutil.LoadFile(t, "testdata/create_company/ok_req.json.golden")))
@@ -47,5 +49,11 @@ func TestCompanyHandler_CreateCompany(t *testing.T) {
 		if resp.StatusCode != http.StatusOK {
 			t.Errorf("status code should be 200, but got: %d", resp.StatusCode)
 		}
+
+		gb, err := io.ReadAll(resp.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		testutil.AssertJSON(t, gb, testutil.LoadFile(t, "testdata/create_company/ok_resp.json.golden"))
 	})
 }

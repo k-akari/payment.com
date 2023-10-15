@@ -39,9 +39,12 @@ func TestCompanyRepository_Create(t *testing.T) {
 			PostalCode:      "postal_code",
 			Address:         "address",
 		}
-		err := h.sub.Create(context.Background(), &company)
+		cid, err := h.sub.Create(context.Background(), &company)
 		if err != nil {
 			t.Errorf("err should be nil, but got: %v", err)
+		}
+		if cid == 0 {
+			t.Errorf("domain.CompanyID should not be 0")
 		}
 	})
 }

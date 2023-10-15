@@ -50,11 +50,15 @@ func TestAdminUsecase_CreateCompany(t *testing.T) {
 
 		h := createCompanyUsecaseTestHelper(t)
 
-		h.companyRepository.EXPECT().Create(h.ctx, &company).Return(nil)
+		cid := domain.CompanyID(10)
+		h.companyRepository.EXPECT().Create(h.ctx, &company).Return(cid, nil)
 
-		err := h.sub.CreateCompany(h.ctx, &company)
+		got, err := h.sub.CreateCompany(h.ctx, &company)
 		if err != nil {
 			t.Errorf("err should be nil, but got: %v", err)
+		}
+		if got != cid {
+			t.Errorf("got: %v, want: %v", got, cid)
 		}
 	})
 
@@ -63,9 +67,9 @@ func TestAdminUsecase_CreateCompany(t *testing.T) {
 
 		h := createCompanyUsecaseTestHelper(t)
 
-		h.companyRepository.EXPECT().Create(h.ctx, &company).Return(errors.New("error"))
+		h.companyRepository.EXPECT().Create(h.ctx, &company).Return(domain.CompanyID(0), errors.New("error"))
 
-		err := h.sub.CreateCompany(h.ctx, &company)
+		_, err := h.sub.CreateCompany(h.ctx, &company)
 		if err == nil {
 			t.Error("err should not be nil")
 		}

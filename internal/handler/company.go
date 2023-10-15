@@ -49,11 +49,15 @@ func (ch *companyHandler) Create(w http.ResponseWriter, r *http.Request) {
 		Address:         b.Address,
 	}
 
-	err = ch.companyUsecase.CreateCompany(ctx, &company)
+	cid, err := ch.companyUsecase.CreateCompany(ctx, &company)
 	if err != nil {
 		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return
 	}
 
-	respondJSON(ctx, w, nil, http.StatusOK)
+	resp := struct {
+		ID domain.CompanyID `json:"id"`
+	}{ID: cid}
+
+	respondJSON(ctx, w, resp, http.StatusOK)
 }

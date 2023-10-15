@@ -40,11 +40,12 @@ func (m *MockcompanyUsecase) EXPECT() *MockcompanyUsecaseMockRecorder {
 }
 
 // CreateCompany mocks base method.
-func (m *MockcompanyUsecase) CreateCompany(ctx context.Context, company *domain.Company) error {
+func (m *MockcompanyUsecase) CreateCompany(ctx context.Context, company *domain.Company) (domain.CompanyID, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateCompany", ctx, company)
-	ret0, _ := ret[0].(error)
-	return ret0
+	ret0, _ := ret[0].(domain.CompanyID)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
 }
 
 // CreateCompany indicates an expected call of CreateCompany.
