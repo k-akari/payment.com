@@ -1,10 +1,14 @@
 .PHONY: \
 	build \
+	run \
 	lint \
 	migrate
 
 build:
 	go build -o dist/api cmd/api/*
+
+run:
+	go run cmd/api/*
 
 lint:
 	golangci-lint run ./...
