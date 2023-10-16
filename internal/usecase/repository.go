@@ -3,6 +3,7 @@ package usecase
 
 import (
 	"context"
+	"time"
 
 	"github.com/k-akari/payment.com/internal/domain"
 )
@@ -18,5 +19,6 @@ type (
 	}
 	invoiceRepository interface {
 		Create(ctx context.Context, invoice *domain.Invoice) (domain.InvoiceID, error)
+		ListByPaymentDueDateBetween(ctx context.Context, coid domain.CompanyID, from, to *time.Time) ([]*domain.Invoice, error)
 	}
 )

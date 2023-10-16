@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/k-akari/payment.com/internal/domain"
 )
@@ -33,4 +34,18 @@ func (u *invoiceUsecase) Create(
 	}
 
 	return iid, nil
+}
+
+func (u *invoiceUsecase) ListByPaymentDueDateBetween(
+	ctx context.Context,
+	coid domain.CompanyID,
+	from *time.Time,
+	to *time.Time,
+) ([]*domain.Invoice, error) {
+	invoices, err := u.invoiceRepository.ListByPaymentDueDateBetween(ctx, coid, from, to)
+	if err != nil {
+		return nil, fmt.Errorf("failed to run u.invoiceRepository.ListByPaymentDueDateBetween: %w", err)
+	}
+
+	return invoices, nil
 }

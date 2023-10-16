@@ -44,6 +44,7 @@ func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
 		mux.Route("/{companyID}", func(mux chi.Router) {
 			mux.Use(companyCtx)
 			mux.Get("/", coh.GetByID)
+			mux.Get("/invoices", ih.ListByPaymentDueDateBetween)
 			mux.Route("/clients", func(mux chi.Router) {
 				mux.Post("/", clh.Create)
 				mux.Route("/{clientID}", func(mux chi.Router) {

@@ -71,5 +71,6 @@ CREATE TABLE `invoices` (
   KEY `fk_invoices_company_id` (`company_id`),
   CONSTRAINT `fk_invoices_company_id` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`),
   KEY `fk_invoices_client_id` (`client_id`),
-  CONSTRAINT `fk_invoices_client_id` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`)
+  CONSTRAINT `fk_invoices_client_id` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
+  KEY `idx_invoices_on_payment_due_date` (`payment_due_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
