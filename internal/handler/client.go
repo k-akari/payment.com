@@ -97,21 +97,5 @@ func (ch *clientHandler) GetByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := struct {
-		CompanyID       domain.CompanyID `json:"company_id"`
-		Name            string           `json:"name"`
-		Representative  string           `json:"representative"`
-		TelephoneNumber string           `json:"telephone_number"`
-		PostalCode      string           `json:"postal_code"`
-		Address         string           `json:"address"`
-	}{
-		CompanyID:       c.CompanyID,
-		Name:            c.Name,
-		Representative:  c.Representative,
-		TelephoneNumber: c.TelephoneNumber,
-		PostalCode:      c.PostalCode,
-		Address:         c.Address,
-	}
-
-	respondJSON(ctx, w, resp, http.StatusOK)
+	respondJSON(ctx, w, c, http.StatusOK)
 }
