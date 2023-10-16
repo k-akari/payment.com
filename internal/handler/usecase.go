@@ -16,4 +16,7 @@ type (
 		Create(ctx context.Context, client *domain.Client) (domain.ClientID, error)
 		GetByID(ctx context.Context, clientID domain.ClientID) (*domain.Client, error)
 	}
+	invoiceUsecase interface {
+		Create(ctx context.Context, invoice *domain.Invoice) (domain.InvoiceID, error)
+	}
 )

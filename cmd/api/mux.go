@@ -31,10 +31,13 @@ func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
 
 	cor := repository.NewCompanyRepository(dbc)
 	clr := repository.NewClientRepository(dbc)
+	ir := repository.NewInvoiceRepository(dbc)
 	cou := usecase.NewCompanyUsecase(cor)
 	clu := usecase.NewClientUsecase(clr)
+	iu := usecase.NewInvoiceUsecase(ir)
 	coh := handler.NewCompanyHandler(cou)
 	clh := handler.NewClientHandler(clu)
+	ih := handler.NewInvoiceHandler(iu)
 
 	mux.Route("/companies", func(mux chi.Router) {
 		mux.Post("/", coh.Create)
@@ -46,6 +49,9 @@ func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
 				mux.Route("/{clientID}", func(mux chi.Router) {
 					mux.Use(clientCtx)
 					mux.Get("/", clh.GetByID)
+					mux.Route("/invoices", func(mux chi.Router) {
+						mux.Post("/", ih.Create)
+					})
 				})
 			})
 		})

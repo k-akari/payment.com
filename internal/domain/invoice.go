@@ -6,6 +6,11 @@ import (
 	"go.mercari.io/go-bps/bps"
 )
 
+const (
+	defaultFeeRate      = 4
+	defaultSalesTaxRate = 10
+)
+
 type (
 	InvoiceID     uint64
 	InvoiceStatus uint8
@@ -15,12 +20,12 @@ type (
 		CompanyID      CompanyID     `db:"company_id"`
 		ClientID       ClientID      `db:"client_id"`
 		IssuedDate     *time.Time    `db:"issued_date"`
-		PaidAmount     int32         `db:"paid_amount"`
-		Fee            int32         `db:"fee"`
+		PaidAmount     int64         `db:"paid_amount"`
+		Fee            int64         `db:"fee"`
 		FeeRate        *bps.BPS      `db:"fee_rate"`
-		SalesTax       int32         `db:"sales_tax"`
+		SalesTax       int64         `db:"sales_tax"`
 		SalesTaxRate   *bps.BPS      `db:"sales_tax_rate"`
-		BilledAmount   int32         `db:"billed_amount"`
+		BilledAmount   int64         `db:"billed_amount"`
 		PaymentDueDate *time.Time    `db:"payment_due_date"`
 		Status         InvoiceStatus `db:"status"`
 		CreatedAt      *time.Time    `db:"created_at"`
@@ -34,3 +39,17 @@ const (
 	InvoiceStatusPaid
 	InvoiceStatusError
 )
+
+func (i *Invoice) SetDefaultRate() {
+	i.FeeRate = bps.NewFromPercentage(defaultFeeRate)
+	i.SalesTaxRate = bps.NewFromPercentage(defaultSalesTaxRate)
+}
+
+func (i *Invoice) CalcBilledAmount() {
+	fee := i.FeeRate.Mul(i.PaidAmount)
+	salesTax := i.SalesTaxRate.Mul(i.PaidAmount)
+
+	i.Fee = fee.Amounts()
+	i.SalesTax = salesTax.Amounts()
+	i.BilledAmount = bps.Sum(bps.NewFromAmount(i.PaidAmount), fee, salesTax).Amounts()
+}
