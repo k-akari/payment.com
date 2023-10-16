@@ -19,8 +19,9 @@ test:
 testv:
 	go test -race -v ./...
 
+DB_HOST ?= 127.0.0.1
 migrate:
-	mysqldef --user=root --password=password --port=3306 --host=db payment < ./db/sql/schema.sql
+	mysqldef --user=root --password=password --port=3306 --host=${DB_HOST} payment < ./db/sql/schema.sql
 
 gen:
 	go generate ./...

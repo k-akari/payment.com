@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
+    environment:
+      DB_HOST: db
     volumes:
       - .:/go/src/github.com/k-akari/payment.com
       - ~/.ssh:/root/.ssh
