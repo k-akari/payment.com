@@ -1,5 +1,6 @@
 services:
   api:
+    container_name: dev
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
