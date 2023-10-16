@@ -11,7 +11,7 @@ import (
 )
 
 type companyUsecaseTestHelper struct {
-	sub               *adminUsecase
+	sub               *companyUsecase
 	ctx               context.Context
 	companyRepository *mock.MockcompanyRepository
 }
