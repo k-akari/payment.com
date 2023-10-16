@@ -6,6 +6,7 @@ services:
       dockerfile: .devcontainer/Dockerfile
     environment:
       DB_HOST: db
+      DB_PORT: 3306
     volumes:
       - .:/go/src/github.com/k-akari/payment.com
       - ~/.ssh:/root/.ssh
