@@ -24,7 +24,12 @@ func (r *invoiceRepository) Create(
 	ctx context.Context,
 	invoice *domain.Invoice,
 ) (domain.InvoiceID, error) {
-	const query = `INSERT INTO invoices (company_id, client_id, issued_date, paid_amount, fee, fee_rate, sales_tax, sales_tax_rate, billed_amount, payment_due_date, status) VALUES (:company_id, :client_id, :issued_date, :paid_amount, :fee, :fee_rate, :sales_tax, :sales_tax_rate, :billed_amount, :payment_due_date, :status)`
+	const query = `
+INSERT INTO invoices (
+	company_id, client_id, issued_date, paid_amount, fee, fee_rate, sales_tax, sales_tax_rate, billed_amount, payment_due_date, status
+) VALUES (
+	:company_id, :client_id, :issued_date, :paid_amount, :fee, :fee_rate, :sales_tax, :sales_tax_rate, :billed_amount, :payment_due_date, :status
+)`
 	result, err := r.dba.Exec(ctx, query, *invoice)
 	if err != nil {
 		return domain.InvoiceID(0), fmt.Errorf("failed to run r.dba.Exec: %w", err)
