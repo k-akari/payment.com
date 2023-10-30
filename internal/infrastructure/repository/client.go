@@ -7,19 +7,19 @@ import (
 	"github.com/k-akari/payment.com/internal/domain"
 )
 
-type clientRepository struct {
+type ClientRepository struct {
 	dba accessor
 }
 
 func NewClientRepository(
 	dba accessor,
-) *clientRepository {
-	return &clientRepository{
+) *ClientRepository {
+	return &ClientRepository{
 		dba: dba,
 	}
 }
 
-func (r *clientRepository) Create(
+func (r *ClientRepository) Create(
 	ctx context.Context,
 	client *domain.Client,
 ) (domain.ClientID, error) {
@@ -42,7 +42,7 @@ func (r *clientRepository) Create(
 	return domain.ClientID(cid), nil
 }
 
-func (r *clientRepository) GetByID(
+func (r *ClientRepository) GetByID(
 	ctx context.Context,
 	clientID domain.ClientID,
 ) (*domain.Client, error) {

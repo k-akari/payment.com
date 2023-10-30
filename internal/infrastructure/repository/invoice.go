@@ -8,19 +8,19 @@ import (
 	"github.com/k-akari/payment.com/internal/domain"
 )
 
-type invoiceRepository struct {
+type InvoiceRepository struct {
 	dba accessor
 }
 
 func NewInvoiceRepository(
 	dba accessor,
-) *invoiceRepository {
-	return &invoiceRepository{
+) *InvoiceRepository {
+	return &InvoiceRepository{
 		dba: dba,
 	}
 }
 
-func (r *invoiceRepository) Create(
+func (r *InvoiceRepository) Create(
 	ctx context.Context,
 	invoice *domain.Invoice,
 ) (domain.InvoiceID, error) {
@@ -48,7 +48,7 @@ INSERT INTO invoices (
 	return domain.InvoiceID(iid), nil
 }
 
-func (r *invoiceRepository) ListByPaymentDueDateBetween(
+func (r *InvoiceRepository) ListByPaymentDueDateBetween(
 	ctx context.Context,
 	coid domain.CompanyID,
 	from *time.Time,

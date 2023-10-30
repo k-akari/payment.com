@@ -10,7 +10,7 @@ import (
 )
 
 type companyRepositoryTestHelper struct {
-	sub *companyRepository
+	sub *CompanyRepository
 }
 
 func createCompanyRepositoryTestHelper(t *testing.T) *companyRepositoryTestHelper {

@@ -10,8 +10,8 @@ import (
 )
 
 type clientRepositoryTestHelper struct {
-	sub               *clientRepository
-	companyRepository *companyRepository
+	sub               *ClientRepository
+	companyRepository *CompanyRepository
 }
 
 func createClientRepositoryTestHelper(t *testing.T) *clientRepositoryTestHelper {

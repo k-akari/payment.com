@@ -7,19 +7,19 @@ import (
 	"github.com/k-akari/payment.com/internal/domain"
 )
 
-type companyRepository struct {
+type CompanyRepository struct {
 	dba accessor
 }
 
 func NewCompanyRepository(
 	dba accessor,
-) *companyRepository {
-	return &companyRepository{
+) *CompanyRepository {
+	return &CompanyRepository{
 		dba: dba,
 	}
 }
 
-func (r *companyRepository) Create(
+func (r *CompanyRepository) Create(
 	ctx context.Context,
 	company *domain.Company,
 ) (domain.CompanyID, error) {
@@ -42,7 +42,7 @@ func (r *companyRepository) Create(
 	return domain.CompanyID(cid), nil
 }
 
-func (r *companyRepository) GetByID(
+func (r *CompanyRepository) GetByID(
 	ctx context.Context,
 	companyID domain.CompanyID,
 ) (*domain.Company, error) {
