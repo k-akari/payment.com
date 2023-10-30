@@ -15,12 +15,12 @@ jobs:
     container:
       image: golang:1.21.3-bookworm
       env:
-        DB_HOST: mysql
+        DB_HOST: db
         DB_PORT: 3306
       ports:
         - 80
     services:
-      mysql:
+      db:
         image: mysql:8.0.32
         options: >-
           --health-cmd "mysqladmin ping -h localhost"
