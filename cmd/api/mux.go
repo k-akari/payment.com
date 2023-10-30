@@ -13,7 +13,7 @@ import (
 	"github.com/k-akari/payment.com/internal/usecase"
 )
 
-func newMux(ctx context.Context, cfg *config) (http.Handler, func(), error) {
+func newMux(_ context.Context, cfg *config) (http.Handler, func(), error) {
 	mux := chi.NewRouter()
 
 	mux.Use(middleware.RequestID)
