@@ -23,10 +23,10 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: payment
-          MYSQL_USER: user
           MYSQL_PASSWORD: password
+          MYSQL_ROOT_HOST: '%'
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: user
     steps:
     - uses: actions/setup-go@v4
       with:
