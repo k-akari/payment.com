@@ -9,14 +9,13 @@ require (
 	golang.org/x/sync v0.4.0
 )
 
-require go.uber.org/mock v0.3.0 // indirect
+require go.uber.org/mock v0.3.0
 
 require (
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
-	github.com/go-chi/chi v1.5.5
+	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/google/go-cmp v0.6.0
 	github.com/google/uuid v1.3.1
