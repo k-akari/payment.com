@@ -79,13 +79,7 @@ func (ch *ClientHandler) Create(w http.ResponseWriter, r *http.Request) {
 func (ch *ClientHandler) GetByID(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	sclid, ok := ctx.Value("clientID").(string)
-	if !ok {
-		respondJSON(ctx, w, &errResponse{Message: "invalid company id"}, http.StatusInternalServerError)
-		return
-	}
-
-	clid, err := strconv.Atoi(sclid)
+	clid, err := getClientIDFromCtx(ctx)
 	if err != nil {
 		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return

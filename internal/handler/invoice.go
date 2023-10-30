@@ -3,7 +3,6 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/k-akari/payment.com/internal/domain"
@@ -25,25 +24,13 @@ func NewInvoiceHandler(
 func (ih *InvoiceHandler) Create(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	scoid, ok := ctx.Value("companyID").(string)
-	if !ok {
-		respondJSON(ctx, w, &errResponse{Message: "invalid company id"}, http.StatusInternalServerError)
-		return
-	}
-
-	coid, err := strconv.Atoi(scoid)
+	coid, err := getCompanyIDFromCtx(ctx)
 	if err != nil {
 		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return
 	}
 
-	sclid, ok := ctx.Value("clientID").(string)
-	if !ok {
-		respondJSON(ctx, w, &errResponse{Message: "invalid company id"}, http.StatusInternalServerError)
-		return
-	}
-
-	clid, err := strconv.Atoi(sclid)
+	clid, err := getClientIDFromCtx(ctx)
 	if err != nil {
 		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return
@@ -89,13 +76,7 @@ func (ih *InvoiceHandler) Create(w http.ResponseWriter, r *http.Request) {
 func (ih *InvoiceHandler) ListByPaymentDueDateBetween(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	scoid, ok := ctx.Value("companyID").(string)
-	if !ok {
-		respondJSON(ctx, w, &errResponse{Message: "invalid company id"}, http.StatusInternalServerError)
-		return
-	}
-
-	coid, err := strconv.Atoi(scoid)
+	coid, err := getCompanyIDFromCtx(ctx)
 	if err != nil {
 		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return

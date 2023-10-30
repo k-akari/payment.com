@@ -63,18 +63,14 @@ func newMux(_ context.Context, cfg *config) (http.Handler, func(), error) {
 
 func companyCtx(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		companyID := chi.URLParam(r, "companyID")
-
-		ctx := context.WithValue(r.Context(), "companyID", companyID)
+		ctx := context.WithValue(r.Context(), handler.CompanyID, chi.URLParam(r, "companyID"))
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
 func clientCtx(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		clientID := chi.URLParam(r, "clientID")
-
-		ctx := context.WithValue(r.Context(), "clientID", clientID)
+		ctx := context.WithValue(r.Context(), handler.ClientID, chi.URLParam(r, "clientID"))
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

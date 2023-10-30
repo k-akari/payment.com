@@ -3,7 +3,6 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
-	"strconv"
 
 	"github.com/k-akari/payment.com/internal/domain"
 	"github.com/k-akari/payment.com/internal/pkg/validator"
@@ -66,19 +65,13 @@ func (ch *CompanyHandler) Create(w http.ResponseWriter, r *http.Request) {
 func (ch *CompanyHandler) GetByID(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	scid, ok := ctx.Value("companyID").(string)
-	if !ok {
-		respondJSON(ctx, w, &errResponse{Message: "invalid company id"}, http.StatusInternalServerError)
-		return
-	}
-
-	cid, err := strconv.Atoi(scid)
+	coid, err := getCompanyIDFromCtx(ctx)
 	if err != nil {
 		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return
 	}
 
-	c, err := ch.companyUsecase.GetCompanyByID(ctx, domain.CompanyID(cid))
+	c, err := ch.companyUsecase.GetCompanyByID(ctx, domain.CompanyID(coid))
 	if err != nil {
 		respondJSON(ctx, w, &errResponse{Message: err.Error()}, http.StatusInternalServerError)
 		return
