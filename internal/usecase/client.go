@@ -7,19 +7,19 @@ import (
 	"github.com/k-akari/payment.com/internal/domain"
 )
 
-type clientUsecase struct {
+type ClientUsecase struct {
 	clientRepository clientRepository
 }
 
 func NewClientUsecase(
 	clientRepository clientRepository,
-) *clientUsecase {
-	return &clientUsecase{
+) *ClientUsecase {
+	return &ClientUsecase{
 		clientRepository: clientRepository,
 	}
 }
 
-func (u *clientUsecase) Create(
+func (u *ClientUsecase) Create(
 	ctx context.Context,
 	client *domain.Client,
 ) (domain.ClientID, error) {
@@ -31,7 +31,7 @@ func (u *clientUsecase) Create(
 	return cid, nil
 }
 
-func (u *clientUsecase) GetByID(
+func (u *ClientUsecase) GetByID(
 	ctx context.Context,
 	clientID domain.ClientID,
 ) (*domain.Client, error) {

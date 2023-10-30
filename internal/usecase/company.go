@@ -7,19 +7,19 @@ import (
 	"github.com/k-akari/payment.com/internal/domain"
 )
 
-type companyUsecase struct {
+type CompanyUsecase struct {
 	companyRepository companyRepository
 }
 
 func NewCompanyUsecase(
 	companyRepository companyRepository,
-) *companyUsecase {
-	return &companyUsecase{
+) *CompanyUsecase {
+	return &CompanyUsecase{
 		companyRepository: companyRepository,
 	}
 }
 
-func (u *companyUsecase) CreateCompany(
+func (u *CompanyUsecase) CreateCompany(
 	ctx context.Context,
 	company *domain.Company,
 ) (domain.CompanyID, error) {
@@ -31,7 +31,7 @@ func (u *companyUsecase) CreateCompany(
 	return cid, nil
 }
 
-func (u *companyUsecase) GetCompanyByID(
+func (u *CompanyUsecase) GetCompanyByID(
 	ctx context.Context,
 	companyID domain.CompanyID,
 ) (*domain.Company, error) {

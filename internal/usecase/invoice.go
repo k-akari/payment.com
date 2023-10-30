@@ -8,19 +8,19 @@ import (
 	"github.com/k-akari/payment.com/internal/domain"
 )
 
-type invoiceUsecase struct {
+type InvoiceUsecase struct {
 	invoiceRepository invoiceRepository
 }
 
 func NewInvoiceUsecase(
 	invoiceRepository invoiceRepository,
-) *invoiceUsecase {
-	return &invoiceUsecase{
+) *InvoiceUsecase {
+	return &InvoiceUsecase{
 		invoiceRepository: invoiceRepository,
 	}
 }
 
-func (u *invoiceUsecase) Create(
+func (u *InvoiceUsecase) Create(
 	ctx context.Context,
 	invoice *domain.Invoice,
 ) (domain.InvoiceID, error) {
@@ -36,7 +36,7 @@ func (u *invoiceUsecase) Create(
 	return iid, nil
 }
 
-func (u *invoiceUsecase) ListByPaymentDueDateBetween(
+func (u *InvoiceUsecase) ListByPaymentDueDateBetween(
 	ctx context.Context,
 	coid domain.CompanyID,
 	from *time.Time,
