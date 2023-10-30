@@ -10,19 +10,19 @@ import (
 	"github.com/k-akari/payment.com/internal/pkg/validator"
 )
 
-type invoiceHandler struct {
+type InvoiceHandler struct {
 	invoiceUsecase invoiceUsecase
 }
 
 func NewInvoiceHandler(
 	invoiceUsecase invoiceUsecase,
-) *invoiceHandler {
-	return &invoiceHandler{
+) *InvoiceHandler {
+	return &InvoiceHandler{
 		invoiceUsecase: invoiceUsecase,
 	}
 }
 
-func (ih *invoiceHandler) Create(w http.ResponseWriter, r *http.Request) {
+func (ih *InvoiceHandler) Create(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	scoid, ok := ctx.Value("companyID").(string)
@@ -86,7 +86,7 @@ func (ih *invoiceHandler) Create(w http.ResponseWriter, r *http.Request) {
 	respondJSON(ctx, w, resp, http.StatusOK)
 }
 
-func (ih *invoiceHandler) ListByPaymentDueDateBetween(w http.ResponseWriter, r *http.Request) {
+func (ih *InvoiceHandler) ListByPaymentDueDateBetween(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	scoid, ok := ctx.Value("companyID").(string)

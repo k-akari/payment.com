@@ -14,7 +14,7 @@ import (
 )
 
 type companyHandlerTestHelper struct {
-	sub            *companyHandler
+	sub            *CompanyHandler
 	companyUsecase *mock.MockcompanyUsecase
 }
 

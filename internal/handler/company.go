@@ -9,19 +9,19 @@ import (
 	"github.com/k-akari/payment.com/internal/pkg/validator"
 )
 
-type companyHandler struct {
+type CompanyHandler struct {
 	companyUsecase companyUsecase
 }
 
 func NewCompanyHandler(
 	companyUsecase companyUsecase,
-) *companyHandler {
-	return &companyHandler{
+) *CompanyHandler {
+	return &CompanyHandler{
 		companyUsecase: companyUsecase,
 	}
 }
 
-func (ch *companyHandler) Create(w http.ResponseWriter, r *http.Request) {
+func (ch *CompanyHandler) Create(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var b struct {
@@ -63,7 +63,7 @@ func (ch *companyHandler) Create(w http.ResponseWriter, r *http.Request) {
 	respondJSON(ctx, w, resp, http.StatusOK)
 }
 
-func (ch *companyHandler) GetByID(w http.ResponseWriter, r *http.Request) {
+func (ch *CompanyHandler) GetByID(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	scid, ok := ctx.Value("companyID").(string)
