@@ -8,19 +8,19 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type client struct {
+type Client struct {
 	db *sqlx.DB
 }
 
 func NewClient(
 	db *sqlx.DB,
-) *client {
-	return &client{
+) *Client {
+	return &Client{
 		db: db,
 	}
 }
 
-func (c *client) Exec(
+func (c *Client) Exec(
 	ctx context.Context,
 	query string,
 	arg any,
@@ -38,7 +38,7 @@ func (c *client) Exec(
 	return result, nil
 }
 
-func (c *client) Query(
+func (c *Client) Query(
 	ctx context.Context,
 	query string,
 	arg interface{},
@@ -56,7 +56,7 @@ func (c *client) Query(
 	return rows, nil
 }
 
-func (c *client) prepare(
+func (c *Client) prepare(
 	query string,
 	arg any,
 ) (string, []any, error) {

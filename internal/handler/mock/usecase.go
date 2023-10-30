@@ -11,6 +11,7 @@ package mock
 import (
 	context "context"
 	reflect "reflect"
+	time "time"
 
 	domain "github.com/k-akari/payment.com/internal/domain"
 	gomock "go.uber.org/mock/gomock"
@@ -105,4 +106,72 @@ func (m *MockclientUsecase) Create(ctx context.Context, client *domain.Client) (
 func (mr *MockclientUsecaseMockRecorder) Create(ctx, client any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockclientUsecase)(nil).Create), ctx, client)
+}
+
+// GetByID mocks base method.
+func (m *MockclientUsecase) GetByID(ctx context.Context, clientID domain.ClientID) (*domain.Client, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetByID", ctx, clientID)
+	ret0, _ := ret[0].(*domain.Client)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetByID indicates an expected call of GetByID.
+func (mr *MockclientUsecaseMockRecorder) GetByID(ctx, clientID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockclientUsecase)(nil).GetByID), ctx, clientID)
+}
+
+// MockinvoiceUsecase is a mock of invoiceUsecase interface.
+type MockinvoiceUsecase struct {
+	ctrl     *gomock.Controller
+	recorder *MockinvoiceUsecaseMockRecorder
+}
+
+// MockinvoiceUsecaseMockRecorder is the mock recorder for MockinvoiceUsecase.
+type MockinvoiceUsecaseMockRecorder struct {
+	mock *MockinvoiceUsecase
+}
+
+// NewMockinvoiceUsecase creates a new mock instance.
+func NewMockinvoiceUsecase(ctrl *gomock.Controller) *MockinvoiceUsecase {
+	mock := &MockinvoiceUsecase{ctrl: ctrl}
+	mock.recorder = &MockinvoiceUsecaseMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockinvoiceUsecase) EXPECT() *MockinvoiceUsecaseMockRecorder {
+	return m.recorder
+}
+
+// Create mocks base method.
+func (m *MockinvoiceUsecase) Create(ctx context.Context, invoice *domain.Invoice) (domain.InvoiceID, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", ctx, invoice)
+	ret0, _ := ret[0].(domain.InvoiceID)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockinvoiceUsecaseMockRecorder) Create(ctx, invoice any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockinvoiceUsecase)(nil).Create), ctx, invoice)
+}
+
+// ListByPaymentDueDateBetween mocks base method.
+func (m *MockinvoiceUsecase) ListByPaymentDueDateBetween(ctx context.Context, coid domain.CompanyID, from, to *time.Time) ([]*domain.Invoice, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListByPaymentDueDateBetween", ctx, coid, from, to)
+	ret0, _ := ret[0].([]*domain.Invoice)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListByPaymentDueDateBetween indicates an expected call of ListByPaymentDueDateBetween.
+func (mr *MockinvoiceUsecaseMockRecorder) ListByPaymentDueDateBetween(ctx, coid, from, to any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListByPaymentDueDateBetween", reflect.TypeOf((*MockinvoiceUsecase)(nil).ListByPaymentDueDateBetween), ctx, coid, from, to)
 }

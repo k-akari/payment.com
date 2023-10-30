@@ -11,6 +11,7 @@ package mock
 import (
 	context "context"
 	reflect "reflect"
+	time "time"
 
 	domain "github.com/k-akari/payment.com/internal/domain"
 	gomock "go.uber.org/mock/gomock"
@@ -120,4 +121,57 @@ func (m *MockclientRepository) GetByID(ctx context.Context, clientID domain.Clie
 func (mr *MockclientRepositoryMockRecorder) GetByID(ctx, clientID any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockclientRepository)(nil).GetByID), ctx, clientID)
+}
+
+// MockinvoiceRepository is a mock of invoiceRepository interface.
+type MockinvoiceRepository struct {
+	ctrl     *gomock.Controller
+	recorder *MockinvoiceRepositoryMockRecorder
+}
+
+// MockinvoiceRepositoryMockRecorder is the mock recorder for MockinvoiceRepository.
+type MockinvoiceRepositoryMockRecorder struct {
+	mock *MockinvoiceRepository
+}
+
+// NewMockinvoiceRepository creates a new mock instance.
+func NewMockinvoiceRepository(ctrl *gomock.Controller) *MockinvoiceRepository {
+	mock := &MockinvoiceRepository{ctrl: ctrl}
+	mock.recorder = &MockinvoiceRepositoryMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockinvoiceRepository) EXPECT() *MockinvoiceRepositoryMockRecorder {
+	return m.recorder
+}
+
+// Create mocks base method.
+func (m *MockinvoiceRepository) Create(ctx context.Context, invoice *domain.Invoice) (domain.InvoiceID, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Create", ctx, invoice)
+	ret0, _ := ret[0].(domain.InvoiceID)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Create indicates an expected call of Create.
+func (mr *MockinvoiceRepositoryMockRecorder) Create(ctx, invoice any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockinvoiceRepository)(nil).Create), ctx, invoice)
+}
+
+// ListByPaymentDueDateBetween mocks base method.
+func (m *MockinvoiceRepository) ListByPaymentDueDateBetween(ctx context.Context, coid domain.CompanyID, from, to *time.Time) ([]*domain.Invoice, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListByPaymentDueDateBetween", ctx, coid, from, to)
+	ret0, _ := ret[0].([]*domain.Invoice)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListByPaymentDueDateBetween indicates an expected call of ListByPaymentDueDateBetween.
+func (mr *MockinvoiceRepositoryMockRecorder) ListByPaymentDueDateBetween(ctx, coid, from, to any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListByPaymentDueDateBetween", reflect.TypeOf((*MockinvoiceRepository)(nil).ListByPaymentDueDateBetween), ctx, coid, from, to)
 }
