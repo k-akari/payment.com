@@ -7,8 +7,11 @@ import (
 	"net"
 	"os"
 
+	"github.com/k-akari/payment.com/internal/handler"
 	"github.com/k-akari/payment.com/internal/infrastructure/database"
+	"github.com/k-akari/payment.com/internal/infrastructure/repository"
 	"github.com/k-akari/payment.com/internal/router"
+	"github.com/k-akari/payment.com/internal/usecase"
 )
 
 func main() {
@@ -37,11 +40,18 @@ func run(ctx context.Context) error {
 	}
 	defer cleanup()
 
-	mux, err := router.NewMux(db)
-	if err != nil {
-		return err
-	}
+	dbc := database.NewClient(db)
+	cor := repository.NewCompanyRepository(dbc)
+	clr := repository.NewClientRepository(dbc)
+	ir := repository.NewInvoiceRepository(dbc)
+	cou := usecase.NewCompanyUsecase(cor)
+	clu := usecase.NewClientUsecase(clr)
+	iu := usecase.NewInvoiceUsecase(ir)
+	coh := handler.NewCompanyHandler(cou)
+	clh := handler.NewClientHandler(clu)
+	ih := handler.NewInvoiceHandler(iu)
 
+	mux := router.NewMux(coh, clh, ih)
 	s := newServer(l, mux)
 
 	return s.run(ctx)

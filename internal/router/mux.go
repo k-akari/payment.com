@@ -6,15 +6,11 @@ import (
 
 	chimid "github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
-	"github.com/jmoiron/sqlx"
 	"github.com/k-akari/payment.com/internal/handler"
-	"github.com/k-akari/payment.com/internal/infrastructure/database"
-	"github.com/k-akari/payment.com/internal/infrastructure/repository"
 	"github.com/k-akari/payment.com/internal/middleware"
-	"github.com/k-akari/payment.com/internal/usecase"
 )
 
-func NewMux(db *sqlx.DB) (http.Handler, error) {
+func NewMux(coh *handler.CompanyHandler, clh *handler.ClientHandler, ih *handler.InvoiceHandler) http.Handler {
 	mux := chi.NewRouter()
 
 	mux.Use(chimid.RequestID)
@@ -22,17 +18,6 @@ func NewMux(db *sqlx.DB) (http.Handler, error) {
 	mux.Use(chimid.Logger)
 	mux.Use(chimid.Recoverer)
 	mux.Use(chimid.Timeout(60 * time.Second))
-
-	dbc := database.NewClient(db)
-	cor := repository.NewCompanyRepository(dbc)
-	clr := repository.NewClientRepository(dbc)
-	ir := repository.NewInvoiceRepository(dbc)
-	cou := usecase.NewCompanyUsecase(cor)
-	clu := usecase.NewClientUsecase(clr)
-	iu := usecase.NewInvoiceUsecase(ir)
-	coh := handler.NewCompanyHandler(cou)
-	clh := handler.NewClientHandler(clu)
-	ih := handler.NewInvoiceHandler(iu)
 
 	mux.Route("/companies", func(mux chi.Router) {
 		mux.Post("/", coh.Create)
@@ -53,5 +38,5 @@ func NewMux(db *sqlx.DB) (http.Handler, error) {
 		})
 	})
 
-	return mux, nil
+	return mux
 }
