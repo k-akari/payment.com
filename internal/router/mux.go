@@ -1,4 +1,4 @@
-package main
+package router
 
 import (
 	"context"
@@ -14,7 +14,7 @@ import (
 	"github.com/k-akari/payment.com/internal/usecase"
 )
 
-func newMux(db *sqlx.DB) (http.Handler, error) {
+func NewMux(db *sqlx.DB) (http.Handler, error) {
 	mux := chi.NewRouter()
 
 	mux.Use(middleware.RequestID)

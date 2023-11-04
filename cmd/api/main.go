@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/k-akari/payment.com/internal/infrastructure/database"
+	"github.com/k-akari/payment.com/internal/router"
 )
 
 func main() {
@@ -36,7 +37,7 @@ func run(ctx context.Context) error {
 	}
 	defer cleanup()
 
-	mux, err := newMux(db)
+	mux, err := router.NewMux(db)
 	if err != nil {
 		return err
 	}
