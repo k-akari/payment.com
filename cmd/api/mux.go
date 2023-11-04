@@ -7,13 +7,14 @@ import (
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
+	"github.com/jmoiron/sqlx"
 	"github.com/k-akari/payment.com/internal/handler"
 	"github.com/k-akari/payment.com/internal/infrastructure/database"
 	"github.com/k-akari/payment.com/internal/infrastructure/repository"
 	"github.com/k-akari/payment.com/internal/usecase"
 )
 
-func newMux(_ context.Context, cfg *config) (http.Handler, func(), error) {
+func newMux(_ context.Context, db *sqlx.DB) (http.Handler, error) {
 	mux := chi.NewRouter()
 
 	mux.Use(middleware.RequestID)
@@ -22,13 +23,7 @@ func newMux(_ context.Context, cfg *config) (http.Handler, func(), error) {
 	mux.Use(middleware.Recoverer)
 	mux.Use(middleware.Timeout(60 * time.Second))
 
-	db, cleanup, err := database.New(cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBName, cfg.DBPort)
-	if err != nil {
-		return nil, cleanup, err
-	}
-
 	dbc := database.NewClient(db)
-
 	cor := repository.NewCompanyRepository(dbc)
 	clr := repository.NewClientRepository(dbc)
 	ir := repository.NewInvoiceRepository(dbc)
@@ -58,7 +53,7 @@ func newMux(_ context.Context, cfg *config) (http.Handler, func(), error) {
 		})
 	})
 
-	return mux, cleanup, nil
+	return mux, nil
 }
 
 func companyCtx(next http.Handler) http.Handler {

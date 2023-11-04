@@ -6,6 +6,8 @@ import (
 	"log"
 	"net"
 	"os"
+
+	"github.com/k-akari/payment.com/internal/infrastructure/database"
 )
 
 func main() {
@@ -27,11 +29,18 @@ func run(ctx context.Context) error {
 	}
 	url := fmt.Sprintf("http://%s", l.Addr().String())
 	log.Printf("start with: %v", url)
-	mux, cleanup, err := newMux(ctx, cfg)
+
+	db, cleanup, err := database.New(cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBName, cfg.DBPort)
+	if err != nil {
+		return fmt.Errorf("failed to connect database: %w", err)
+	}
+	defer cleanup()
+
+	mux, err := newMux(ctx, db)
 	if err != nil {
 		return err
 	}
-	defer cleanup()
+
 	s := newServer(l, mux)
 
 	return s.run(ctx)
