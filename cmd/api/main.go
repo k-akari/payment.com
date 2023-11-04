@@ -36,7 +36,7 @@ func run(ctx context.Context) error {
 	}
 	defer cleanup()
 
-	mux, err := newMux(ctx, db)
+	mux, err := newMux(db)
 	if err != nil {
 		return err
 	}
