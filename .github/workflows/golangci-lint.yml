@@ -8,6 +8,10 @@ on:
       - 'cmd/**'
       - 'internal/**'
       - '.golangci.yml'
+      - 'go.mod'
+      - 'go.sum'
+      - 'docker/*'
+      - '.devcontainer/*'
 
 permissions:
   contents: read

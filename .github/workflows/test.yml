@@ -7,7 +7,10 @@ on:
     paths:
       - 'cmd/**'
       - 'internal/**'
-      - '.golangci.yml'
+      - 'go.mod'
+      - 'go.sum'
+      - 'docker/*'
+      - '.devcontainer/*'
 
 jobs:
   test:
