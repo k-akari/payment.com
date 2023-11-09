@@ -38,7 +38,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_USER: user
     steps:
-    - uses: actions/checkout@v4.1.1
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
     - run: go test ./... -coverprofile=coverage.out
     - name: report coverage
-      uses: k1LoW/octocov-action@v0
+      uses: k1LoW/octocov-action@c62c637ab559f6dab8ef157a1ccc8e1364226c31 # v0.54.6
