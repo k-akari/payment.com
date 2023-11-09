@@ -1,10 +1,18 @@
 pull_request_rules:
-  - name: automatic merge for Dependabot pull requests
+  - name: automatic merge for PRs to update go modules and docker
     conditions:
       - author = dependabot[bot]
       - '#approved-reviews-by >= 1'
       - check-success = test
       - check-success = golangci-lint
+    actions:
+      merge:
+        method: merge
+  - name: automatic merge for PRs to update GitHub Actions
+    conditions:
+      - author = dependabot[bot]
+      - '#approved-reviews-by >= 1'
+      - label = github_actions
     actions:
       merge:
         method: merge
