@@ -13,7 +13,8 @@
         "eamodio.gitlens",
         "editorconfig.editorconfig",
         "github.copilot",
-        "golang.go"
+        "golang.go",
+        "mhutchie.git-graph"
       ]
     }
   }
