@@ -16,7 +16,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: golang:1.21.3-bookworm
+      image: golang:1.21.3
       env:
         DB_HOST: db
         DB_PORT: 3306
