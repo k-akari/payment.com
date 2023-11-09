@@ -7,9 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/k-akari/payment.com/internal/domain"
-	"github.com/k-akari/payment.com/internal/handler/mock"
-	"github.com/k-akari/payment.com/internal/testutil"
+	"github.com/k-akari/golang-rest-api-sample/internal/domain"
+	"github.com/k-akari/golang-rest-api-sample/internal/handler/mock"
+	"github.com/k-akari/golang-rest-api-sample/internal/testutil"
 	gomock "go.uber.org/mock/gomock"
 )
 

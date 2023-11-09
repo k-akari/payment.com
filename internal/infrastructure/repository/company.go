@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/k-akari/payment.com/internal/domain"
+	"github.com/k-akari/golang-rest-api-sample/internal/domain"
 )
 
 type CompanyRepository struct {

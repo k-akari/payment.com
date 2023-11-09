@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/k-akari/payment.com/internal/domain"
-	"github.com/k-akari/payment.com/internal/pkg/validator"
+	"github.com/k-akari/golang-rest-api-sample/internal/domain"
+	"github.com/k-akari/golang-rest-api-sample/internal/pkg/validator"
 )
 
 type ClientHandler struct {

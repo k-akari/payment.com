@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/k-akari/payment.com/internal/domain"
-	"github.com/k-akari/payment.com/internal/infrastructure/database"
-	"github.com/k-akari/payment.com/internal/testutil"
+	"github.com/k-akari/golang-rest-api-sample/internal/domain"
+	"github.com/k-akari/golang-rest-api-sample/internal/infrastructure/database"
+	"github.com/k-akari/golang-rest-api-sample/internal/testutil"
 )
 
 type clientRepositoryTestHelper struct {

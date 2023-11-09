@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/k-akari/payment.com/internal/domain"
-	"github.com/k-akari/payment.com/internal/usecase/mock"
+	"github.com/k-akari/golang-rest-api-sample/internal/domain"
+	"github.com/k-akari/golang-rest-api-sample/internal/usecase/mock"
 	gomock "go.uber.org/mock/gomock"
 )
 

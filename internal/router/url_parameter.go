@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/k-akari/payment.com/internal/handler"
+	"github.com/k-akari/golang-rest-api-sample/internal/handler"
 )
 
 func setCompanyIDToCtx(next http.Handler) http.Handler {

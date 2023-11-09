@@ -7,7 +7,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./:/go/src/github.com/k-akari/payment.com
+      - ./:/go/src/github.com/k-akari/golang-rest-api-sample
     networks:
       - db
     depends_on:

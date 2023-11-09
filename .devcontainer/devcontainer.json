@@ -6,7 +6,7 @@
   ],
   "postStartCommand": "go mod download",
   "service": "api",
-  "workspaceFolder": "/go/src/github.com/k-akari/payment.com",
+  "workspaceFolder": "/go/src/github.com/k-akari/golang-rest-api-sample",
   "customizations": {
     "vscode": {
       "extensions": [

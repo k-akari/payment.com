@@ -1,4 +1,4 @@
-module github.com/k-akari/payment.com
+module github.com/k-akari/golang-rest-api-sample
 
 go 1.21.3
 

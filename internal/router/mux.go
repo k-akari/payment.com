@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
-	"github.com/k-akari/payment.com/internal/handler"
+	"github.com/k-akari/golang-rest-api-sample/internal/handler"
 )
 
 func NewMux(coh *handler.CompanyHandler, clh *handler.ClientHandler, ih *handler.InvoiceHandler) http.Handler {

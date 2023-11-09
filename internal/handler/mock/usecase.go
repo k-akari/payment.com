@@ -13,7 +13,7 @@ import (
 	reflect "reflect"
 	time "time"
 
-	domain "github.com/k-akari/payment.com/internal/domain"
+	domain "github.com/k-akari/golang-rest-api-sample/internal/domain"
 	gomock "go.uber.org/mock/gomock"
 )
 

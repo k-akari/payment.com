@@ -8,7 +8,7 @@ services:
       DB_HOST: db
       DB_PORT: 3306
     volumes:
-      - .:/go/src/github.com/k-akari/payment.com
+      - .:/go/src/github.com/k-akari/golang-rest-api-sample
       - ~/.ssh:/root/.ssh
       - ~/.gitconfig:/root/.gitconfig
       - go_mod:/go/pkg/mod

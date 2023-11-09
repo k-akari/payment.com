@@ -7,11 +7,11 @@ import (
 	"net"
 	"os"
 
-	"github.com/k-akari/payment.com/internal/handler"
-	"github.com/k-akari/payment.com/internal/infrastructure/database"
-	"github.com/k-akari/payment.com/internal/infrastructure/repository"
-	"github.com/k-akari/payment.com/internal/router"
-	"github.com/k-akari/payment.com/internal/usecase"
+	"github.com/k-akari/golang-rest-api-sample/internal/handler"
+	"github.com/k-akari/golang-rest-api-sample/internal/infrastructure/database"
+	"github.com/k-akari/golang-rest-api-sample/internal/infrastructure/repository"
+	"github.com/k-akari/golang-rest-api-sample/internal/router"
+	"github.com/k-akari/golang-rest-api-sample/internal/usecase"
 )
 
 func main() {

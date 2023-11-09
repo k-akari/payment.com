@@ -2,7 +2,7 @@ FROM golang:1.21.4-bookworm as builder
 
 ENV CGO_ENABLED 0
 
-WORKDIR /go/src/github.com/k-akari/payment.com
+WORKDIR /go/src/github.com/k-akari/golang-rest-api-sample
 
 COPY . .
 
@@ -12,7 +12,7 @@ RUN make build
 
 FROM gcr.io/distroless/static-debian12:latest as api
 
-COPY --from=builder --chown=nonroot:nonroot /go/src/github.com/k-akari/payment.com/dist/api /api
+COPY --from=builder --chown=nonroot:nonroot /go/src/github.com/k-akari/golang-rest-api-sample/dist/api /api
 
 USER nonroot
 

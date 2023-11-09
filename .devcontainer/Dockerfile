@@ -28,7 +28,7 @@ RUN ARCH=$(uname -m) && \
   rm "$FILE"
 
 # Set working directory
-WORKDIR /go/src/github.com/k-akari/payment.com
+WORKDIR /go/src/github.com/k-akari/golang-rest-api-sample
 
 # Copy source files
 COPY . .
