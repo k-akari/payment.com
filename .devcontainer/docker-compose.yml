@@ -20,6 +20,7 @@ services:
       - db
     networks:
       - db
+      - redis
 
 volumes:
   go_mod:

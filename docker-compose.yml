@@ -10,8 +10,10 @@ services:
       - ./:/go/src/github.com/k-akari/golang-rest-api-sample
     networks:
       - db
+      - redis
     depends_on:
       - db
+      - redis
 
   db:
     image: mysql/mysql-server:8.0.32
@@ -27,6 +29,16 @@ services:
       - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - db
+
+  redis:
+    image: redis:7.2.3
+    container_name: redis
+    ports:
+      - 36379:6379
+    volumes:
+      - redis_data:/data
+    networks:
+      - redis
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -44,6 +56,8 @@ services:
 
 volumes:
   db_data:
+  redis_data:
 
 networks:
   db:
+  redis:
