@@ -12,10 +12,12 @@ var (
 )
 
 type testEnv struct {
-	DBHost string `env:"DB_HOST" envDefault:"db"`
-	DBPort uint16 `env:"DB_PORT" envDefault:"3306"`
-	DBUser string `env:"DB_USER" envDefault:"root"`
-	DBPass string `env:"DB_PASS" envDefault:"password"`
+	DBHost    string `env:"DB_HOST" envDefault:"db"`
+	DBPort    uint16 `env:"DB_PORT" envDefault:"3306"`
+	DBUser    string `env:"DB_USER" envDefault:"root"`
+	DBPass    string `env:"DB_PASS" envDefault:"password"`
+	RedisHost string `env:"REDIS_HOST" envDefault:"redis"`
+	RedisPort int    `env:"REDIS_PORT" envDefault:"6379"`
 }
 
 func loadEnv() *testEnv {
