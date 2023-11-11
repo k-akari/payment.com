@@ -20,6 +20,8 @@ jobs:
       env:
         DB_HOST: db
         DB_PORT: 3306
+        REDIS_HOST: redis
+        REDIS_PORT: 6379
       ports:
         - 80
     services:
@@ -37,6 +39,15 @@ jobs:
           MYSQL_ROOT_HOST: '%'
           MYSQL_ROOT_PASSWORD: password
           MYSQL_USER: user
+      redis:
+        image: redis:7.2.3
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 20s
+          --health-timeout 10s
+          --health-retries 10
+        ports:
+          - 6379:6379
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
     - run: go test ./... -coverprofile=coverage.out
