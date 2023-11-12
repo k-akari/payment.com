@@ -20,34 +20,34 @@ type (
 		ID             InvoiceID     `db:"id" json:"id"`
 		CompanyID      CompanyID     `db:"company_id" json:"company_id"`
 		ClientID       ClientID      `db:"client_id" json:"client_id"`
-		IssuedDate     *time.Time    `db:"issued_date" json:"issued_date"`
+		IssuedDate     time.Time     `db:"issued_date" json:"issued_date"`
 		PaidAmount     int64         `db:"paid_amount" json:"paid_amount"`
 		Fee            int64         `db:"fee" json:"fee"`
 		FeeRate        *bps.BPS      `db:"fee_rate" json:"fee_rate"`
 		SalesTax       int64         `db:"sales_tax" json:"sales_tax"`
 		SalesTaxRate   *bps.BPS      `db:"sales_tax_rate" json:"sales_tax_rate"`
 		BilledAmount   int64         `db:"billed_amount" json:"billed_amount"`
-		PaymentDueDate *time.Time    `db:"payment_due_date" json:"payment_due_date"`
+		PaymentDueDate time.Time     `db:"payment_due_date" json:"payment_due_date"`
 		Status         InvoiceStatus `db:"status" json:"status"`
-		CreatedAt      *time.Time    `db:"created_at" json:"created_at"`
-		UpdatedAt      *time.Time    `db:"updated_at" json:"updated_at"`
+		CreatedAt      time.Time     `db:"created_at" json:"created_at"`
+		UpdatedAt      time.Time     `db:"updated_at" json:"updated_at"`
 	}
 
 	InvoiceRecord struct {
 		ID             InvoiceID     `db:"id"`
 		CompanyID      CompanyID     `db:"company_id"`
 		ClientID       ClientID      `db:"client_id"`
-		IssuedDate     *time.Time    `db:"issued_date"`
+		IssuedDate     time.Time     `db:"issued_date"`
 		PaidAmount     int64         `db:"paid_amount"`
 		Fee            int64         `db:"fee"`
 		FeeRate        string        `db:"fee_rate"`
 		SalesTax       int64         `db:"sales_tax"`
 		SalesTaxRate   string        `db:"sales_tax_rate"`
 		BilledAmount   int64         `db:"billed_amount"`
-		PaymentDueDate *time.Time    `db:"payment_due_date"`
+		PaymentDueDate time.Time     `db:"payment_due_date"`
 		Status         InvoiceStatus `db:"status"`
-		CreatedAt      *time.Time    `db:"created_at"`
-		UpdatedAt      *time.Time    `db:"updated_at"`
+		CreatedAt      time.Time     `db:"created_at"`
+		UpdatedAt      time.Time     `db:"updated_at"`
 	}
 )
 

@@ -55,9 +55,9 @@ func (ih *InvoiceHandler) Create(w http.ResponseWriter, r *http.Request) {
 	invoice := domain.Invoice{
 		CompanyID:      domain.CompanyID(coid),
 		ClientID:       domain.ClientID(clid),
-		IssuedDate:     &b.IssuedDate,
+		IssuedDate:     b.IssuedDate,
 		PaidAmount:     b.PaidAmount,
-		PaymentDueDate: &b.PaymentDueDate,
+		PaymentDueDate: b.PaymentDueDate,
 	}
 
 	iid, err := ih.invoiceUsecase.Create(ctx, &invoice)
