@@ -4,6 +4,7 @@ import (
 	"context"
 	_ "embed"
 	"fmt"
+	"net/http"
 	"time"
 
 	"github.com/google/uuid"
@@ -35,8 +36,8 @@ type SessionStore interface {
 	LoadUserID(ctx context.Context, key string) (domain.UserID, error)
 }
 
-func NewJWTer(s SessionStore) (*JWTer, error) {
-	j := &JWTer{SessionStore: s, Clocker: clock.RealClocker{}}
+func NewJWTer(s SessionStore, c clock.Clocker) (*JWTer, error) {
+	j := &JWTer{SessionStore: s, Clocker: c}
 
 	privkey, err := parse(rawPrivKey)
 	if err != nil {
@@ -85,4 +86,21 @@ func (j *JWTer) CreateToken(ctx context.Context, u *domain.User) ([]byte, error)
 	}
 
 	return signed, nil
+}
+
+func (j *JWTer) GetToken(ctx context.Context, r *http.Request) (jwt.Token, error) {
+	tok, err := jwt.ParseRequest(r, jwt.WithKey(jwa.RS256, j.PublicKey), jwt.WithValidate(false))
+	if err != nil {
+		return nil, fmt.Errorf("failed in ParseRequest: %w", err)
+	}
+
+	if err := jwt.Validate(tok, jwt.WithClock(j.Clocker)); err != nil {
+		return nil, fmt.Errorf("failed in Validate: %w", err)
+	}
+
+	if _, err := j.SessionStore.LoadUserID(ctx, tok.JwtID()); err != nil {
+		return nil, fmt.Errorf("failed in LoadUserID: %w", err)
+	}
+
+	return tok, nil
 }
