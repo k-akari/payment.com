@@ -12,6 +12,7 @@ services:
       - ~/.ssh:/root/.ssh
       - ~/.gitconfig:/root/.gitconfig
       - go_mod:/go/pkg/mod
+      - go_bin:/go/bin
     ports:
       - 8081:8080
     stdin_open: true
@@ -24,3 +25,4 @@ services:
 
 volumes:
   go_mod:
+  go_bin:
