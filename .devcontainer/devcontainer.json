@@ -4,7 +4,7 @@
     "../docker-compose.yml",
     "docker-compose.yml"
   ],
-  "postStartCommand": "go mod download",
+  "postStartCommand": "./.devcontainer/post_start.sh",
   "service": "api",
   "workspaceFolder": "/go/src/github.com/k-akari/golang-rest-api-sample",
   "customizations": {

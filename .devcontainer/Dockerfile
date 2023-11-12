@@ -18,9 +18,9 @@ RUN apt update && \
 # Install sqldef
 RUN ARCH=$(uname -m) && \
   case "$ARCH" in \
-    x86_64) FILE="mysqldef_linux_amd64.tar.gz" ;; \
-    aarch64) FILE="mysqldef_linux_arm64.tar.gz" ;; \
-    *) echo "Unsupported architecture" && exit 1 ;; \
+  x86_64) FILE="mysqldef_linux_amd64.tar.gz" ;; \
+  aarch64) FILE="mysqldef_linux_arm64.tar.gz" ;; \
+  *) echo "Unsupported architecture" && exit 1 ;; \
   esac && \
   curl -OL "https://github.com/k0kubun/sqldef/releases/download/v0.16.9/$FILE" && \
   tar -zxvf "$FILE" && \

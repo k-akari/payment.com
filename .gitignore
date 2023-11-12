@@ -5,3 +5,7 @@ dist/*
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.sample.json
+
+# certificates
+internal/auth/cert/public.pem
+internal/auth/cert/secret.pem
