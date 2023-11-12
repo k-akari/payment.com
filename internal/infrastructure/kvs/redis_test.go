@@ -13,7 +13,7 @@ func TestKVS_Save(t *testing.T) {
 	t.Parallel()
 
 	cli := testutil.OpenRedisForTest(t)
-	sut := &KVS{cli: cli}
+	sut := &KVS{Cli: cli}
 
 	key := "TestKVS_Save"
 	uid := domain.UserID(1234)
@@ -30,7 +30,7 @@ func TestKVS_Load(t *testing.T) {
 	t.Parallel()
 
 	cli := testutil.OpenRedisForTest(t)
-	sut := &KVS{cli: cli}
+	sut := &KVS{Cli: cli}
 
 	t.Run("ok", func(t *testing.T) {
 		t.Parallel()

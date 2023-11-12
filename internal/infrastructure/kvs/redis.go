@@ -10,7 +10,7 @@ import (
 )
 
 type KVS struct {
-	cli *redis.Client
+	Cli *redis.Client
 }
 
 func NewClient(ctx context.Context, host string, port int) (*KVS, error) {
@@ -21,12 +21,12 @@ func NewClient(ctx context.Context, host string, port int) (*KVS, error) {
 		return nil, fmt.Errorf("failed to ping redis: %w", err)
 	}
 
-	return &KVS{cli: cli}, nil
+	return &KVS{Cli: cli}, nil
 }
 
 func (k *KVS) SaveUserID(ctx context.Context, key string, userID domain.UserID) error {
 	id := int64(userID)
-	if err := k.cli.Set(ctx, key, id, 24*time.Hour).Err(); err != nil {
+	if err := k.Cli.Set(ctx, key, id, 24*time.Hour).Err(); err != nil {
 		return fmt.Errorf("failed to set %q: %w", key, err)
 	}
 
@@ -34,7 +34,7 @@ func (k *KVS) SaveUserID(ctx context.Context, key string, userID domain.UserID) 
 }
 
 func (k *KVS) LoadUserID(ctx context.Context, key string) (domain.UserID, error) {
-	id, err := k.cli.Get(ctx, key).Int64()
+	id, err := k.Cli.Get(ctx, key).Int64()
 	if err != nil {
 		return 0, fmt.Errorf("failed to get by %q: %w", key, err)
 	}
