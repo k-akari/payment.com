@@ -2,12 +2,19 @@ package auth
 
 import (
 	"context"
+	_ "embed"
 	"fmt"
 
 	"github.com/k-akari/golang-rest-api-sample/internal/domain"
 	"github.com/k-akari/golang-rest-api-sample/internal/pkg/clock"
 	"github.com/lestrrat-go/jwx/v2/jwk"
 )
+
+//go:embed cert/secret.pem
+var rawPrivKey []byte
+
+//go:embed cert/public.pem
+var rawPubKey []byte
 
 type JWTer struct {
 	PrivateKey, PublicKey jwk.Key
@@ -20,7 +27,7 @@ type SessionStore interface {
 	LoadUserID(ctx context.Context, key string) (domain.UserID, error)
 }
 
-func NewJWTer(rawPrivKey, rawPubKey []byte, s SessionStore) (*JWTer, error) {
+func NewJWTer(s SessionStore) (*JWTer, error) {
 	j := &JWTer{SessionStore: s, Clocker: clock.RealClocker{}}
 
 	privkey, err := parse(rawPrivKey)
