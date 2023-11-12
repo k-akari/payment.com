@@ -50,6 +50,13 @@ jobs:
           - 6379:6379
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+    - name: Setup .pem files
+      run: |
+        echo "$SECRET_KEY" > internal/auth/cert/secret.pem
+        echo "$PUBLIC_KEY" > internal/auth/cert/public.pem
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY_CI }}
+        PUBLIC_KEY: ${{ secrets.PUBLIC_KEY_CI }}
     - run: go test ./... -coverprofile=coverage.out
     - name: report coverage
       uses: k1LoW/octocov-action@c62c637ab559f6dab8ef157a1ccc8e1364226c31 # v0.54.6
