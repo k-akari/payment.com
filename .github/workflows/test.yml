@@ -59,4 +59,4 @@ jobs:
         PUBLIC_KEY: ${{ secrets.PUBLIC_KEY_CI }}
     - run: go test ./... -coverprofile=coverage.out
     - name: report coverage
-      uses: k1LoW/octocov-action@02d21e7bc90d159e54ea86a87a1a6d0c27db4a4c # v0.54.6
+      uses: k1LoW/octocov-action@6ffbe23ab40b97c34021274e3f70ce9e8e98c6f8 # v0.54.6
