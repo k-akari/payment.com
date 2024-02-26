@@ -11,7 +11,7 @@ require (
 
 require (
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/lestrrat-go/jwx/v2 v2.0.19
+	github.com/lestrrat-go/jwx/v2 v2.0.20
 	go.uber.org/mock v0.3.0
 )
 
