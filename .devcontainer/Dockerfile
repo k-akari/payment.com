@@ -1,4 +1,4 @@
-FROM golang:1.22.1-bookworm
+FROM golang:1.22.2-bookworm
 
 # Install required packages
 RUN apt update && \
